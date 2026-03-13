@@ -6,6 +6,7 @@ from fastapi.exceptions import RequestValidationError
 from app.auth.middleware import JWTMiddleware
 from app.auth.routes import auth_router
 from app.routers.products import router as product_router
+from app.routers.cart import router as cart_router
 from app.database import Base, engine
 
 Base.metadata.create_all(bind=engine)
@@ -18,6 +19,7 @@ app.add_middleware(JWTMiddleware)
 # Routers
 app.include_router(auth_router)
 app.include_router(product_router)
+app.include_router(cart_router)
 
 
 @app.get("/health")
