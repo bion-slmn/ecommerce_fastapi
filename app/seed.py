@@ -9,13 +9,10 @@ from models.cart_items import CartItem
 from models.orders import Order
 from models.order_items import OrderItem
 
-# 1️⃣ Create all tables
 Base.metadata.create_all(bind=engine)
 
-# 2️⃣ Open a session
 session = Session(bind=engine)
 
-# 3️⃣ Seed data
 categories = ["Electronics", "Books", "Clothing"]
 
 products = [

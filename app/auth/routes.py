@@ -46,7 +46,7 @@ def login(body: LoginSchema, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == body.email).first()
     if not user:
         raise HTTPException(
-            status_code=401,                        # don't reveal if email exists
+            status_code=401,                        
             detail="Invalid credentials"
         )
     if not verify_password(body.password, user.password_hash, db, user):
@@ -59,9 +59,8 @@ def login(body: LoginSchema, db: Session = Depends(get_db)):
     expires_at = datetime.utcnow() + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS)
 
     return JSONResponse(status_code=200, content={
-        "access_token": token,
-        "token_type": "bearer",
-        "expires_in": expires_at.isoformat(),
+        "accessToken": token,
+        "expiresIn": expires_at.isoformat(),
         "user": {"id": user.id, "name": user.name, "email": user.email}
     })
 
