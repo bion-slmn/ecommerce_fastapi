@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text, Numeric, DateTime, func
 from sqlalchemy.orm import declarative_base
 
-from database import Base
+from app.database import Base
 class Product(Base):
     __tablename__ = 'product'
 

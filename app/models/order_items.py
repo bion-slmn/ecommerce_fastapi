@@ -3,8 +3,7 @@
 from sqlalchemy import Column, Integer, ForeignKey, Numeric
 from sqlalchemy.orm import declarative_base, relationship
 
-from database import Base
-
+from app.database import Base
 class OrderItem(Base):
     __tablename__ = 'order_items'
 

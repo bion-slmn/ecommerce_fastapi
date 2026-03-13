@@ -5,10 +5,22 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env
 load_dotenv()
 
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
+print("DB URL:", SQLALCHEMY_DATABASE_URL)   # 👈 add this to confirm it loads
+
+if not SQLALCHEMY_DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set in .env")
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+def get_db():                         # ✅ was missing
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
